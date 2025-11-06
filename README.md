@@ -10,7 +10,7 @@ As I begin the project, this is my current system design plan
 
 
 ### Database Design (ERD)
-Here is my initial database design for the application. Note that the `users` table is built-in by Supabase.
+Here is my initial database design for the application. Note that the `users` table is built-in by Supabase. In reality, it has a lot more columns than just `id`.
 
 <img src="images/erd.png" alt="My Diagram">
 
