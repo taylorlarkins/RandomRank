@@ -9,7 +9,15 @@ export default function Auth({ onLogin }: { onLogin: () => void }) {
 
   const handleSignUp = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signUp({ email, password });
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: import.meta.env.VITE_SITE_URL,
+      },
+    });
+
     if (error) setMessage(error.message);
     else setMessage('Check your email for a confirmation link!');
     setLoading(false);
