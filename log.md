@@ -17,12 +17,12 @@
   </tr>
   <tr>
     <td align="left">11/6</td>
-    <td align="left">Server configuration</td>
-    <td align="center">1.0</td>
+    <td align="left">Server configuration and authentication debugging</td>
+    <td align="center">1.5</td>
   </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>6.2</b></td>
+    <td align="center"><b>6.7</b></td>
   </tr>
 </table>
