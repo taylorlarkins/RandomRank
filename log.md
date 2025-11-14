@@ -20,9 +20,14 @@
     <td align="left">Server configuration and authentication debugging</td>
     <td align="center">1.5</td>
   </tr>
+  <tr>
+    <td align="left">11/13</td>
+    <td align="left">Learning React, relearing JavaScript/TypeScript</td>
+    <td align="center">2.5</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>6.7</b></td>
+    <td align="center"><b>9.2</b></td>
   </tr>
 </table>

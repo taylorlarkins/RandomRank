@@ -12,10 +12,7 @@ export default function Auth({ onLogin }: { onLogin: () => void }) {
 
     const { error } = await supabase.auth.signUp({
       email,
-      password,
-      options: {
-        emailRedirectTo: import.meta.env.VITE_SITE_URL,
-      },
+      password
     });
 
     if (error) setMessage(error.message);
