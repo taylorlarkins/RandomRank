@@ -22,7 +22,7 @@
   </tr>
   <tr>
     <td align="left">11/13</td>
-    <td align="left">Learning React, relearing JavaScript/TypeScript</td>
+    <td align="left">Learning/Refreshing React, JavaScript, and TypeScript</td>
     <td align="center">2.5</td>
   </tr>
    <tr>
