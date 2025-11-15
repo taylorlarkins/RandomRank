@@ -26,8 +26,13 @@
     <td align="center">2.5</td>
   </tr>
    <tr>
+    <td align="left">11/14</td>
+    <td align="left">Building UI</td>
+    <td align="center">3.0</td>
+  </tr>
+   <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>9.2</b></td>
+    <td align="center"><b>12.2</b></td>
   </tr>
 </table>
