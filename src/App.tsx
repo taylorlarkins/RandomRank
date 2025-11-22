@@ -45,10 +45,10 @@ const rankingTwo = [
 ]
 
 export const App = () => {
-  //return <LoginPage />
+  return <LoginPage />
   //return <RankPage dailyItems={todayItems}/>;
   //return <SignUpPage/>;
-  return <HomePage/>;
+  //return <HomePage/>;
   //return <FriendsPage/>;
   //return <ComparisonPage date="November 14th, 2025" friendName="John Smith" yourRanking={rankingOne} friendRanking={rankingTwo}/>
 }

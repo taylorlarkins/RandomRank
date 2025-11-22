@@ -1,27 +1,124 @@
+import { useState } from "react";
+import { supabase } from "../supabaseClient";
+
 export default function SignUpForm() {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      // Check if username is already taken
+      const { data: existing, error: checkError } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("username", username)
+        .single();
+
+      if (checkError && checkError.code !== "PGRST116") {
+        // PGRST116 = no rows found
+        setError("Error checking username availability.");
+        setLoading(false);
+        return;
+      }
+
+      if (existing) {
+        setError("Username already taken. Please choose another one.");
+        setLoading(false);
+        return;
+      }
+
+      // Sign up the user in Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setLoading(false);
+        return;
+      }
+
+      if (!authData.user) {
+        setError("Unexpected error: user not created.");
+        setLoading(false);
+        return;
+      }
+
+      const userId = authData.user.id;
+
+      // Insert the username in profiles table
+      const { error: profileError } = await supabase.from("profiles").insert([
+        {
+          id: userId,
+          username,
+        },
+      ]);
+
+      if (profileError) {
+        setError("Error saving profile. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      setSuccess("Account created! Check your email to confirm your account.");
+      setEmail("");
+      setUsername("");
+      setPassword("");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={handleSignUp}>
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+      {success && <p className="text-green-500 text-sm text-center">{success}</p>}
+
       <input
         type="email"
         placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         className="p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        required
       />
       <input
         type="text"
         placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         className="p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        required
       />
       <input
         type="password"
         placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         className="p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        required
       />
 
       <button
         type="submit"
-        className="p-3 mt-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition"
+        className={`p-3 mt-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition ${
+          loading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        disabled={loading}
       >
-        Sign Up
+        {loading ? "Signing Up..." : "Sign Up"}
       </button>
 
       <p className="text-sm text-gray-500 text-center mt-2">
