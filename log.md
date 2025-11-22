@@ -30,9 +30,14 @@
     <td align="left">Building UI</td>
     <td align="center">3.0</td>
   </tr>
+  <tr>
+    <td align="left">11/21</td>
+    <td align="left">More UI design, signup and login functionality</td>
+    <td align="center">2.3</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>12.2</b></td>
+    <td align="center"><b>14.5</b></td>
   </tr>
 </table>
