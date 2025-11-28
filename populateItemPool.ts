@@ -1,3 +1,6 @@
+// Run to populate item pool.
+// npx tsx populateItemPool.ts
+
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
@@ -21,18 +24,18 @@ function sleep(ms: number) {
 async function fetchBatchWords(batchSize = 100): Promise<string[]> {
   const url = `https://api.wordnik.com/v4/words.json/randomWords` +
     `?hasDictionaryDef=true` +
-    `&includePartOfSpeech=noun,adjective` +
+    `&includePartOfSpeech=noun` +
     `&minLength=3` +
-    `&minDictionaryCount=3` +
-    `&minCorpusCount=5000` +
-    `&excludePartOfSpeech=abbreviation,given-name,family-name,noun-plural` +
+    `&minDictionaryCount=5` +
+    `&minCorpusCount=20000` +
+    `&excludePartOfSpeech=abbreviation,given-name,family-name,noun-plural,proper-noun,proper-noun-plural,past-participle` +
     `&limit=${batchSize}` +
     `&api_key=${wordnikApiKey}`;
 
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Wordnik API error: ${res.status} ${res.statusText}`);
-    const data = await res.json();
+    const data: any = await res.json();
     return data.map((w: any) => w.word.trim().toLowerCase());
   } catch (err) {
     console.error("Error fetching batch:", err);
