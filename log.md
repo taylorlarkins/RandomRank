@@ -45,9 +45,14 @@
     <td align="left">Item generation/filtering, cron job to pick daily items</td>
     <td align="center">2.0</td>
   </tr>
+  <tr>
+    <td align="left">12/1</td>
+    <td align="left">Pull daily items, ranking submission, and authentication guard</td>
+    <td align="center">2.3</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>18.5</b></td>
+    <td align="center"><b>20.8</b></td>
   </tr>
 </table>

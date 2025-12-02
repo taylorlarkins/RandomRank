@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -13,7 +15,7 @@ export default function LoginForm() {
     setError(null);
 
     try {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      const { error: signInError, data: authData } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -28,15 +30,27 @@ export default function LoginForm() {
         return;
       }
 
-      // Successful login
-      setError(null);
-      alert("Login successful!"); // Replace with redirect or state update
+      const today = new Date().toISOString().slice(0, 10);
+      const { data: ranking, error: rankingError } = await supabase
+        .from("user_rankings")
+        .select("id")
+        .eq("user_id", authData.user?.id)
+        .eq("date", today)
+        .single();
+
+      if (rankingError || !ranking) {
+        navigate("/rank");
+      } else {
+        navigate("/");
+      }
+
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleLogin}>
@@ -71,9 +85,12 @@ export default function LoginForm() {
 
       <p className="text-sm text-gray-500 text-center mt-2">
         Don't have an account?{" "}
-        <span className="text-purple-500 hover:underline cursor-pointer">
+        <Link
+          to="/signup"
+          className="text-purple-500 hover:underline"
+        >
           Sign up
-        </span>
+        </Link>
       </p>
     </form>
   );
