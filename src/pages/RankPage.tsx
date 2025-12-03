@@ -1,15 +1,50 @@
 import { useEffect, useState } from "react";
 import { Reorder } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { getDailyItems } from "../lib/getDailyItems";
-import { submitRanking } from "../lib/submitRanking";
+import { getDailyItems } from "../utils/getDailyItems";
+import { submitRanking } from "../utils/submitRanking";
+import { supabase } from "../supabaseClient";
+import { getMountainDateString } from "../utils/getMountainDate";
+import ProfileMenu from "../components/ProfileMenu";
 
 const RankPage: React.FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState<string[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [checkingRanking, setCheckingRanking] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    async function checkRanking() {
+      try {
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError || !user) {
+          navigate("/login");
+          return;
+        }
+
+        const today = getMountainDateString();
+
+        const { data: ranking } = await supabase
+          .from("user_rankings")
+          .select("id")
+          .eq("user_id", user.id)
+          .eq("date", today)
+          .single();
+
+        if (ranking) {
+          navigate("/"); // Already submitted → redirect home
+        } else {
+          setCheckingRanking(false); // Allowed to rank
+        }
+      } catch (err: any) {
+        console.error(err);
+        setError("Failed to check today's ranking.");
+      }
+    }
+    checkRanking();
+  }, [navigate]);
 
   useEffect(() => {
     async function loadItems() {
@@ -24,8 +59,10 @@ const RankPage: React.FC = () => {
       }
     }
 
-    loadItems();
-  }, []);
+    if (!checkingRanking) {
+      loadItems();
+    }
+  }, [checkingRanking]);
 
   const handleSubmit = async () => {
     if (!items) return;
@@ -44,12 +81,15 @@ const RankPage: React.FC = () => {
     }
   };
 
-  if (loading) {
+  if (checkingRanking || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Loading…
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <div className="bg-gray-800/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-gray-700 text-center w-full max-w-sm">
+        <h2 className="text-white text-lg font-semibold mb-2">RandomRank</h2>
+        <p className="text-gray-400">Loading today's ranking...</p>
       </div>
-    );
+    </div>
+  );
   }
 
   if (error && !items) {
@@ -84,6 +124,7 @@ const RankPage: React.FC = () => {
 
   return (
     <div className="min-h-screen p-4 bg-gray-900 flex flex-col items-center justify-center">
+      <ProfileMenu />
       <div className="bg-gray-800/80 backdrop-blur-md p-4 rounded-2xl shadow-2xl w-full max-w-md mx-auto">
         <h1 className="text-white text-lg font-bold text-center mb-2">
           {today}

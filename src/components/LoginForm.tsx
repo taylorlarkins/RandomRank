@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
+import { getMountainDateString } from "../utils/getMountainDate";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function LoginForm() {
         return;
       }
 
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getMountainDateString();
       const { data: ranking, error: rankingError } = await supabase
         .from("user_rankings")
         .select("id")
