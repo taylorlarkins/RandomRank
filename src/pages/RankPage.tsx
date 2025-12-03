@@ -34,9 +34,9 @@ const RankPage: React.FC = () => {
           .single();
 
         if (ranking) {
-          navigate("/"); // Already submitted → redirect home
+          navigate("/");
         } else {
-          setCheckingRanking(false); // Allowed to rank
+          setCheckingRanking(false);
         }
       } catch (err: any) {
         console.error(err);
@@ -83,13 +83,33 @@ const RankPage: React.FC = () => {
 
   if (checkingRanking || loading) {
     return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-      <div className="bg-gray-800/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-gray-700 text-center w-full max-w-sm">
-        <h2 className="text-white text-lg font-semibold mb-2">RandomRank</h2>
-        <p className="text-gray-400">Loading today's ranking...</p>
+      <div className="min-h-screen p-4 bg-gray-900 flex flex-col items-center justify-center">
+        <ProfileMenu />
+
+        <div className="bg-gray-800/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl w-full max-w-md mx-auto flex flex-col items-center">
+          <h1 className="text-white text-lg font-bold text-center mb-3">
+            {formatPrettyDate(new Date())}
+          </h1>
+
+          <p className="text-gray-400 text-center mb-4 text-sm">
+            Loading today's ranking items...
+          </p>
+
+          <div className="flex flex-col gap-2 w-full items-center mb-4">
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className="bg-gray-700 h-8 rounded-lg w-full max-w-[190px] animate-pulse"
+              ></div>
+            ))}
+          </div>
+
+          <div className="mt-2 flex justify-center">
+            <div className="w-6 h-6 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
   }
 
   if (error && !items) {

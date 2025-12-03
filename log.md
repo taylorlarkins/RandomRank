@@ -50,9 +50,14 @@
     <td align="left">Pull daily items, ranking submission, and authentication guard</td>
     <td align="center">2.3</td>
   </tr>
+  <tr>
+    <td align="left">12/2</td>
+    <td align="left">Improved navigation and page loading</td>
+    <td align="center">2.0</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>20.8</b></td>
+    <td align="center"><b>22.8</b></td>
   </tr>
 </table>
