@@ -55,9 +55,14 @@
     <td align="left">Improved navigation and page loading</td>
     <td align="center">2.0</td>
   </tr>
+  <tr>
+    <td align="left">12/4</td>
+    <td align="left">Friend support, RLS updates, and ranking comparison research</td>
+    <td align="center">3.0</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>22.8</b></td>
+    <td align="center"><b>25.8</b></td>
   </tr>
 </table>
