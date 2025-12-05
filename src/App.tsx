@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import RankPage from "./pages/RankPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import FriendsPage from "./pages/FriendsPage";
 
 export default function App() {
   return (
@@ -25,6 +26,14 @@ export default function App() {
             element={
               <RequireAuth>
                 <RankPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/friends"
+            element={
+              <RequireAuth>
+                <FriendsPage />
               </RequireAuth>
             }
           />

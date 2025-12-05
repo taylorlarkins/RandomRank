@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 import { getMountainDateString } from "../utils/getMountainDate";
 import UserSidebar from "../components/UserSidebar";
 import StatsCarousel from "../components/StatsCarousel";
-import FriendsSidebar from "../components/friends/FriendsSidebar";
+import FriendsSidebar from "../components/FriendsSidebar";
 import ProfileMenu from "../components/ProfileMenu";
 
 export default function HomePage() {
