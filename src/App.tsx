@@ -7,6 +7,7 @@ import RankPage from "./pages/RankPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import FriendsPage from "./pages/FriendsPage";
+import FriendComparisonPage from "./pages/FriendComparisonPage";
 
 export default function App() {
   return (
@@ -37,7 +38,14 @@ export default function App() {
               </RequireAuth>
             }
           />
-
+          <Route
+            path="/compare/:friendId"
+            element={
+              <RequireAuth>
+                <FriendComparisonPage />
+              </RequireAuth>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
 

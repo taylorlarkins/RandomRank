@@ -17,27 +17,23 @@ export default function SignUpForm() {
     setSuccess(null);
 
     try {
-      // Check if username is already taken
-      const { data: existing, error: checkError } = await supabase
+      const { data: existingUsername, error: usernameError } = await supabase
         .from("profiles")
-        .select("id")
+        .select("id, username")
         .eq("username", username)
-        .single();
+        .maybeSingle();
 
-      if (checkError && checkError.code !== "PGRST116") {
-        // PGRST116 = no rows found
+      if (usernameError) {
+        console.error(usernameError);
         setError("Error checking username availability.");
-        setLoading(false);
         return;
       }
 
-      if (existing) {
+      if (existingUsername) {
         setError("Username already taken. Please choose another one.");
-        setLoading(false);
         return;
       }
 
-      // Sign up the user in Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -45,19 +41,16 @@ export default function SignUpForm() {
 
       if (authError) {
         setError(authError.message);
-        setLoading(false);
         return;
       }
 
       if (!authData.user) {
         setError("Unexpected error: user not created.");
-        setLoading(false);
         return;
       }
 
       const userId = authData.user.id;
 
-      // Insert the username in profiles table
       const { error: profileError } = await supabase.from("profiles").insert([
         {
           id: userId,
@@ -66,8 +59,8 @@ export default function SignUpForm() {
       ]);
 
       if (profileError) {
+        console.error(profileError);
         setError("Error saving profile. Please try again.");
-        setLoading(false);
         return;
       }
 
@@ -75,12 +68,15 @@ export default function SignUpForm() {
       setEmail("");
       setUsername("");
       setPassword("");
+
     } catch (err: any) {
-      setError(err.message || "Something went wrong");
+      console.error(err);
+      setError(err.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSignUp}>

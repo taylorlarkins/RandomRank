@@ -60,9 +60,14 @@
     <td align="left">Friend support, RLS updates, and ranking comparison research</td>
     <td align="center">3.0</td>
   </tr>
+  <tr>
+    <td align="left">12/5</td>
+    <td align="left">Ranking comparison, global average ranking, UI improvements</td>
+    <td align="center">4.0</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>25.8</b></td>
+    <td align="center"><b>29.8</b></td>
   </tr>
 </table>
