@@ -31,7 +31,7 @@ const RankPage: React.FC = () => {
           .select("id")
           .eq("user_id", user.id)
           .eq("date", today)
-          .single();
+          .maybeSingle();
 
         if (ranking) {
           navigate("/");
@@ -84,7 +84,9 @@ const RankPage: React.FC = () => {
   if (checkingRanking || loading) {
     return (
       <div className="min-h-screen p-4 bg-gray-900 flex flex-col items-center justify-center">
-        <ProfileMenu />
+        <div className="absolute top-4 right-4">
+          <ProfileMenu />
+        </div>
 
         <div className="bg-gray-800/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl w-full max-w-md mx-auto flex flex-col items-center">
           <h1 className="text-white text-lg font-bold text-center mb-3">
@@ -144,7 +146,9 @@ const RankPage: React.FC = () => {
 
   return (
     <div className="min-h-screen p-4 bg-gray-900 flex flex-col items-center justify-center">
-      <ProfileMenu />
+      <div className="absolute top-4 right-4">
+          <ProfileMenu />
+      </div>
       <div className="bg-gray-800/80 backdrop-blur-md p-4 rounded-2xl shadow-2xl w-full max-w-md mx-auto">
         <h1 className="text-white text-lg font-bold text-center mb-2">
           {today}

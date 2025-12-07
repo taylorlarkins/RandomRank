@@ -37,7 +37,7 @@ export default function LoginForm() {
         .select("id")
         .eq("user_id", authData.user?.id)
         .eq("date", today)
-        .single();
+        .maybeSingle();
 
       if (rankingError || !ranking) {
         navigate("/rank");

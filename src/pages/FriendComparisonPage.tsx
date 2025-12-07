@@ -115,6 +115,7 @@ export default function FriendComparisonPage() {
   }, [rows]);
 
   const formattedDate = formatFullDate(date);
+  const noComparison = !hasMyData || !hasFriendData;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative p-3">
@@ -182,7 +183,7 @@ export default function FriendComparisonPage() {
 
               {loading ? (
                 <p className="text-gray-400 text-center text-sm">Loading…</p>
-              ) : !hasMyData ? (
+              ) : noComparison ? (
                 <p className="text-gray-500 text-center text-sm">
                   No comparison for this date.
                 </p>
@@ -216,9 +217,9 @@ export default function FriendComparisonPage() {
             <div className="bg-gray-800/80 p-3 rounded-2xl border border-gray-700 shadow-xl flex-1">
               {loading ? (
                 <p className="text-gray-400 text-center text-sm">Loading…</p>
-              ) : !hasFriendData ? (
+              ) : noComparison ? (
                 <p className="text-gray-500 text-center text-sm">
-                    No comparison for this date.
+                  No comparison for this date.
                 </p>
               ) : (
                 <ul className="space-y-1.5">
