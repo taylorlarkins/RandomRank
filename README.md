@@ -19,7 +19,7 @@ Here is my initial database design for the application. The final database desig
 
 ### Project Follow Up
 
-##### What I learned?
+##### What I Learned
 I learned a lot about web development, React, Typescript, Tailwind CSS, Supabase, row level security, and general database management. These were concepts I was largely unfamilair with before, but taking on a project like this was a great way to learn more!
 
 ##### AI Integrations?
