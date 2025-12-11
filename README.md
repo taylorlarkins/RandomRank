@@ -20,7 +20,7 @@ Here is my initial database design for the application. The final database desig
 ### Project Follow Up
 
 ##### What I learned?
-I learned a lot about web development, React, Typescript, Tailwind CSS, Supabase, row level security, and general database management. These were concepts I was largely unfamilair with before, but taking on a project like this was a great way to learn!
+I learned a lot about web development, React, Typescript, Tailwind CSS, Supabase, row level security, and general database management. These were concepts I was largely unfamilair with before, but taking on a project like this was a great way to learn more!
 
 ##### AI Integrations?
 Currently this project does not have any integration with AI, but I am considering using AI to generate better nouns that are a little "less random" and more interesting to compare and contrast.
@@ -28,8 +28,8 @@ Currently this project does not have any integration with AI, but I am consideri
 ##### AI Utilitzation
 AI was extremely helpful in learning concepts, designing the UI, and writing database logic. This project was a helpful demonstration of the power of AI in web development.
 
-##### Why this project is interesting
-I enjoy playing online daily puzzle games and comparing my results with my friends. I've also always been interested in web development, but until recently I did not have a sufficient understanding of databases to really create anything cool. This project was a fun oppotunity to apply and further develop my knowledge of databases to make something interesting.
+##### Why this Project is Interesting
+I enjoy playing online daily puzzle games and comparing my results with friends. I've also always been interested in web development, but until recently I did not have a sufficient understanding of databases to really create anything cool. This project was a fun opportunity to apply and further develop my knowledge of databases to make something interesting.
 
 ##### Key Learnings
 1. React/Typescript, Taillwind CSS, and Supabase make up a powerful tech stack for webdevelopment.
