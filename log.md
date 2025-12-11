@@ -70,9 +70,14 @@
     <td align="left">Bug fixes, testing, pushing to production</td>
     <td align="center">1.0</td>
   </tr>
+  <tr>
+    <td align="left">12/7-12/10</td>
+    <td align="left">Testing, reporting</td>
+    <td align="center">1.0</td>
+  </tr>
    <tr>
     <td align="left"><b>TOTAL</b></td>
     <td align="left"></td>
-    <td align="center"><b>30.8</b></td>
+    <td align="center"><b>31.8</b></td>
   </tr>
 </table>
